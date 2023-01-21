@@ -79,17 +79,11 @@ ORDER BY
 	visits.visit_date DESC
 LIMIT 1;
 
-SELECT
-	vets.name,
-	count(animals.name)
-FROM
-	animals
-	JOIN visits ON animals.id = visits.animals_id
-	JOIN vets ON vets.id = visits.vets_id
-WHERE
-	vets.id = 3
-GROUP BY
-	vets.name;
+SELECT DISTINCT vets.name AS vet_name, animals.name AS animal_name 
+FROM visits 
+JOIN animals ON animals.id = visits.animal_id 
+AND vet_id = (SELECT id FROM vets WHERE name = 'Stephanie Mendez')
+JOIN vets ON vets.id = visits.vet_id;
 
 SELECT
 	vets.name AS vets_name,
@@ -99,16 +93,10 @@ FROM
 	LEFT JOIN specializations ON vets.id = specializations.vets_id
 	LEFT JOIN species ON species.id = specializations.species_id;
 
-SELECT
-	animals.name AS animal_name,
-	vets.name AS vets_name
-FROM
-	animals
-	JOIN visits ON animals.id = visits.animals_id
-	JOIN vets ON visits.vets_id = vets.id
-WHERE
-	vets.id = 3
-	AND visits.visit_date BETWEEN '2020-04-01' AND '2020-08-30';
+SELECT vets.name AS vet_name, animals.name AS animal_name, date_of_visit
+FROM visits
+JOIN animals ON animals.id = visits.vet_id
+JOIN vets ON vets.id = visits.vet_id AND vets.name = 'Stephanie Mendez' AND date_of_visit BETWEEN '04-01-2020' AND '08-30-2020';
 
 SELECT
 	animals.name,
