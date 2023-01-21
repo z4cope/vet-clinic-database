@@ -15,5 +15,13 @@ INSERT INTO animals(name, date_of_birth, weight_kg, neutered, escape_attempts) V
 INSERT INTO animals(name, date_of_birth, weight_kg, neutered, escape_attempts) VALUES('Blossom', '1992-10-13', 17, TRUE, 3);
 INSERT INTO animals(name, date_of_birth, weight_kg, neutered, escape_attempts) VALUES('Ditto', '2022-5-14', 22, FALSE, 4);
 
+--
+
+UPDATE animals SET owner_id =  (SELECT id FROM owners WHERE full_name = 'Sam Smith') WHERE name = 'Agumon';
+UPDATE animals SET owner_id =  (SELECT id FROM owners WHERE full_name = 'Jennifer Orwell') WHERE name IN ('Pikachu','Gabumon');
+UPDATE animals SET owner_id =  (SELECT id FROM owners WHERE full_name = 'Bob') WHERE name IN ('Devimon','Plantmon');
+UPDATE animals SET owner_id =  (SELECT id FROM owners WHERE full_name = 'Melody Pond') WHERE name IN ('Charmander', 'Squirtle', 'Blossom');
+UPDATE animals SET owner_id =  (SELECT id FROM owners WHERE full_name = 'Dean Winchester') WHERE name IN ('Angemon', 'Boarmon');
+
 
 
